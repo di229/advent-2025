@@ -30,3 +30,34 @@ export function day1(input) {
   }
   return zeros;
 }
+
+export function day1e(input) {
+  let zeros = 0;
+  let position = 50;
+  for (const step of input) {
+    const dir = step.substring(0,1);
+    const amt = parseInt(step.substring(1));
+    if (dir === 'L') {
+      if (position == 0) {
+        zeros += Math.floor(amt / 100);
+      } else if (amt >= position) {
+        zeros += Math.floor((amt - position) / 100) + 1;
+      }
+      // next position:
+      position = (position - amt) % 100;
+      if (position < 0) {
+        // keep position +ve
+        position += 100;
+      }
+    }
+    else if (dir === 'R') {
+      zeros += Math.floor((position + amt) / 100);
+      // next position:
+      position = (position + amt) % 100;
+    }
+    else {
+      throw new Error("Input format");
+    }
+  }
+  return zeros;
+}
