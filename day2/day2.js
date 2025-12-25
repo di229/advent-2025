@@ -1,10 +1,9 @@
 import { open } from 'node:fs/promises';
 
 export async function readInputRanges(filepath) {
-  let fd;
   const result = [];
+  const fd = await open(filepath, 'r');
   try {
-    fd = await open(filepath, 'r');
     const data = await fd.readFile({
       encoding: "utf-8",
     });
@@ -16,7 +15,7 @@ export async function readInputRanges(filepath) {
       });
     }
   } finally {
-    await fd?.close();
+    await fd.close();
   }
   return result;
 }

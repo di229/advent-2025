@@ -1,10 +1,14 @@
 import { open } from 'node:fs/promises';
 
 export async function readInputLines(filepath) {
-  const fd = await open(filepath, 'r');
   const arr = [];
-  for await (const line of fd.readLines()) {
-    arr.push(line);
+  const fd = await open(filepath, 'r');
+  try {
+    for await (const line of fd.readLines()) {
+      arr.push(line);
+    }
+  } finally {
+    await fd.close();
   }
   return arr;
 }
@@ -34,25 +38,16 @@ export function day1(input) {
 export function day1e(input) {
   let zeros = 0;
   let position = 50;
+  const invert = (pos) => (pos === 0) ? 0 : 100 - pos;
   for (const step of input) {
     const dir = step.substring(0,1);
     const amt = parseInt(step.substring(1));
     if (dir === 'L') {
-      if (position == 0) {
-        zeros += Math.floor(amt / 100);
-      } else if (amt >= position) {
-        zeros += Math.floor((amt - position) / 100) + 1;
-      }
-      // next position:
-      position = (position - amt) % 100;
-      if (position < 0) {
-        // keep position +ve
-        position += 100;
-      }
+      zeros += Math.floor((invert(position) + amt) / 100);
+      position = invert((invert(position) + amt) % 100);
     }
     else if (dir === 'R') {
       zeros += Math.floor((position + amt) / 100);
-      // next position:
       position = (position + amt) % 100;
     }
     else {
