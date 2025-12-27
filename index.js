@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readInputLines, day1, day1e } from './day1/day1.js';
 import { readInputRanges, day2 } from './day2/day2.js';
+import { day3 } from './day3/day3.js';
 
 await test("Day 1", t => {
   t.test("part 1 sample result is 3", async () => {
@@ -30,5 +31,16 @@ await test("Day 2", async t => {
 
   t.test("part 1 result is 44487518055", () => {
     assert.strictEqual(day2(input), 44487518055);
+  });
+});
+
+await test("Day 3", async t => {
+  const sample = await readInputLines('day3/inputs/sample');
+  t.test("part 1 sample result is 357", () => {
+    assert.strictEqual(day3(sample), 357);
+  });
+  const input = await readInputLines('day3/inputs/input');
+  t.test("part 1 result is 16887", () => {
+    assert.strictEqual(day3(input), 16887);
   });
 });
