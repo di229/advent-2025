@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readInputLines, day1, day1e } from './day1/day1.js';
 import { readInputRanges, day2 } from './day2/day2.js';
 import { day3 } from './day3/day3.js';
+import { readGrid, day4 } from './day4/day4.js';
 
 await test("Day 1", t => {
   t.test("part 1 sample result is 3", async () => {
@@ -42,5 +43,16 @@ await test("Day 3", async t => {
   const input = await readInputLines('day3/inputs/input');
   t.test("part 1 result is 16887", () => {
     assert.strictEqual(day3(input), 16887);
+  });
+});
+
+await test("Day 4", async t => {
+  const sampleGrid = await readGrid('day4/inputs/sample');
+  t.test("part 1 sample result is 13", () => {
+    assert.strictEqual(day4(sampleGrid), 13);
+  });
+  const inputGrid = await readGrid('day4/inputs/input');
+  t.test("part 1 result is 1547", () => {
+    assert.strictEqual(day4(inputGrid), 1547);
   });
 });
