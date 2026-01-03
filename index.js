@@ -4,6 +4,7 @@ import { readInputLines, day1, day1e } from './day1/day1.js';
 import { readInputRanges, day2 } from './day2/day2.js';
 import { day3 } from './day3/day3.js';
 import { readGrid, day4, day4e } from './day4/day4.js';
+import { day5 } from './day5/day5.js';
 
 await test("Day 1", t => {
   t.test("part 1 sample result is 3", async () => {
@@ -58,7 +59,18 @@ await test("Day 4", async t => {
   await t.test("part 2 sample result is 43", () => {
     assert.strictEqual(day4e(sampleGrid), 43);
   });
-  await t.test("part 2 result is 43", () => {
-    assert.strictEqual(day4e(inputGrid), 43);
+  await t.test("part 2 result is 8948", () => {
+    assert.strictEqual(day4e(inputGrid), 8948);
+  });
+});
+
+await test("Day 5", async t => {
+  t.test("part 1 sample result is 3", async () => {
+    const r = await day5("day5/inputs/sample");
+    assert.strictEqual(r, 3);
+  });
+  t.test("part 1 result is 674", async () => {
+    const r = await day5("day5/inputs/input");
+    assert.strictEqual(r, 674);
   });
 });
